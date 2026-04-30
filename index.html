@@ -3,84 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pintura "Sem Título" com P5.js</title>
-    <!-- Carregando a biblioteca p5.js -->
+    <title>Pintura Max Bill - P5.js</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    
     <style>
         body {
             margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f8f8f8;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
         }
+
         canvas {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 1px solid #ccc;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .info-container {
+            text-align: center;
+            margin-top: 25px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .instrucao {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
+<div id="canvas-container"></div>
 
-<h1> Título: Sem Título</h1>
-    <br>
-<h1> Artista: Max Bill </h1>
-    <br>
-<p> Técnica: Serigrafia sobre papel </p>
-    <br>
-<p>Ano: 1967 </p>
-  
+<div class="info-container">
+    <h1>Sem Título</h1>
+    <p><strong>Artista:</strong> Max Bill</p>
+    <p><strong>Técnica:</strong> Serigrafia sobre papel | <strong>Ano:</strong> 1967</p>
+    <p class="instrucao">Clique na tela para a pintura sumir, clique de novo para voltar</p>
+</div>
+
 <script>
+let exibir = true; // Variável que controla se a pintura aparece
+
 function setup() {
-  // Cria canvas de 600x600 pixels
-  createCanvas(600, 600);
+  let cnv = createCanvas(600, 600);
+  cnv.parent('canvas-container'); // Coloca o canvas dentro da div específica
   noStroke(); 
 }
 
 function draw() {
-  // Cor de fundo
-  background(235); 
+  background(240); 
 
-  let size = 300; // Tamanho do quadrado central
-  let x = width / 2;
-  let y = height / 2;
+  if (exibir) {
+    let size = 300;
+    let x = width / 2;
+    let y = height / 2;
 
-  // Quadrado Central Branco
-  fill(255);
-  rectMode(CENTER);
-  rect(x, y, size, size);
+    // Quadrado Central Branco
+    fill(255);
+    rectMode(CENTER);
+    rect(x, y, size, size);
 
-  // Triângulo Superior (Preto)
-  fill(0);
-  triangle(
-    x - size / 2, y - size / 2, 
-    x + size / 2, y - size / 2, 
-    x, 0                        
-  );
+    // Triângulo Superior (Preto)
+    fill(0);
+    triangle(x - size / 2, y - size / 2, x + size / 2, y - size / 2, x, 0);
 
-  // Triângulo Inferior (Amarelo)
-  fill(255, 215, 0); 
-  triangle(
-    x - size / 2, y + size / 2, 
-    x + size / 2, y + size / 2, 
-    x, height                   
-  );
+    // Triângulo Inferior (Amarelo)
+    fill(255, 215, 0); 
+    triangle(x - size / 2, y + size / 2, x + size / 2, y + size / 2, x, height);
 
-  // Triângulo Esquerdo (Azul)
-  fill(10, 70, 210);
-  triangle(
-    x - size / 2, y - size / 2, 
-    x - size / 2, y + size / 2, 
-    0, y                        
-  );
+    // Triângulo Esquerdo (Azul)
+    fill(10, 70, 210);
+    triangle(x - size / 2, y - size / 2, x - size / 2, y + size / 2, 0, y);
 
-  // Triângulo Direito (Vermelho)
-  fill(210, 30, 20);
-  triangle(
-    x + size / 2, y - size / 2, 
-    x + size / 2, y + size / 2, 
-    width, y                    
-  );
+    // Triângulo Direito (Vermelho)
+    fill(210, 30, 20);
+    triangle(x + size / 2, y - size / 2, x + size / 2, y + size / 2, width, y);
+  }
+}
+
+// Função que detecta o clique do mouse
+function mousePressed() {
+  // Verifica se o clique foi dentro da área do canvas
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+    exibir = !exibir; // Inverte o valor de true para false e vice-versa
+  }
 }
 </script>
 
