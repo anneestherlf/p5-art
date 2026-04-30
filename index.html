@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pintura "Sem Título" com P5.js</title>
+    <!-- Carregando a biblioteca p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+
+<h1> Título: Sem Título </h1>
+<h1> Artista: Max Bill </h1>
+<p> Técnica: Serigrafia sobre papel </p>
+<p>Ano: 1967 </p>
+  
+<script>
+function setup() {
+  // Cria canvas de 600x600 pixels
+  createCanvas(600, 600);
+  noStroke(); 
+}
+
+function draw() {
+  // Cor de fundo
+  background(235); 
+
+  let size = 300; // Tamanho do quadrado central
+  let x = width / 2;
+  let y = height / 2;
+
+  // Quadrado Central Branco
+  fill(255);
+  rectMode(CENTER);
+  rect(x, y, size, size);
+
+  // Triângulo Superior (Preto)
+  fill(0);
+  triangle(
+    x - size / 2, y - size / 2, 
+    x + size / 2, y - size / 2, 
+    x, 0                        
+  );
+
+  // Triângulo Inferior (Amarelo)
+  fill(255, 215, 0); 
+  triangle(
+    x - size / 2, y + size / 2, 
+    x + size / 2, y + size / 2, 
+    x, height                   
+  );
+
+  // Triângulo Esquerdo (Azul)
+  fill(10, 70, 210);
+  triangle(
+    x - size / 2, y - size / 2, 
+    x - size / 2, y + size / 2, 
+    0, y                        
+  );
+
+  // Triângulo Direito (Vermelho)
+  fill(210, 30, 20);
+  triangle(
+    x + size / 2, y - size / 2, 
+    x + size / 2, y + size / 2, 
+    width, y                    
+  );
+}
+</script>
+
+</body>
+</html>
